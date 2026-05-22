@@ -1,0 +1,61 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FastaAnalyzer.ViewModels"
+    xmlns:model="using:FastaAnalyzer.Models"
+    
+    x:Class="FastaAnalyzer.MainWindow"
+    x:DataType="vm:MainWindowViewModel"
+    mc:Ignorable="d"
+    Width="1000"
+    Height="700">
+
+    <StackPanel Margin="10" Spacing="10">
+
+        <Button Content="Wczytaj FASTA"
+                Command="{Binding LoadFastaCommand}" />
+
+        <ListBox ItemsSource="{Binding Sequences}"
+                 SelectedItem="{Binding SelectedSequence}"
+                 Height="150">
+
+            <ListBox.ItemTemplate>
+
+                <DataTemplate x:DataType="model:FastaSequence">
+
+                    <TextBlock Text="{Binding Name}" />
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+        <TextBlock Text="{Binding SelectedSequence.Name}"
+                   FontSize="20"/>
+
+        <TextBlock Text="{Binding GCContent, StringFormat='GC: {0:F2}%'}"/>
+
+        <TextBlock Text="{Binding Codons, StringFormat='Kodony: {0}'}"/>
+
+        <TextBlock Text="{Binding CountA, StringFormat='A: {0}'}"/>
+
+        <TextBlock Text="{Binding CountT, StringFormat='T: {0}'}"/>
+
+        <TextBlock Text="{Binding CountG, StringFormat='G: {0}'}"/>
+
+        <TextBlock Text="{Binding CountC, StringFormat='C: {0}'}"/>
+
+       
+
+        <Button Content="Eksport CSV"
+                Command="{Binding ExportCsvCommand}"/>
+
+        <Button Content="Eksport JSON"
+                Command="{Binding ExportJsonCommand}"/>
+
+    </StackPanel>
+
+</Window>
